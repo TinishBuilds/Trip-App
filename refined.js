@@ -36,6 +36,20 @@ document.querySelectorAll('.board-tabs > button:not(.add-place)').forEach((tab) 
   });
 });
 
+// Rebuild from the complete seeded set before applying a category so every filter can be revisited.
+document.querySelectorAll('.filter-row .filter').forEach((filterButton) => {
+  filterButton.addEventListener('click', () => {
+    const label = filterButton.textContent.trim().toLowerCase();
+    renderOpps('#opportunity-grid', opportunities.length, true);
+    document.querySelectorAll('#opportunity-grid .opp-card').forEach((card) => {
+      const type = card.querySelector('.tag')?.textContent.toLowerCase() || '';
+      const show = label.startsWith('all') || (label.startsWith('student') && type.includes('student')) || (label.startsWith('travel') && type.includes('travel')) || (label.startsWith('local') && type.includes('local')) || (label.startsWith('free') && card.textContent.toLowerCase().includes('free'));
+      card.hidden = !show;
+    });
+    document.querySelectorAll('#opportunity-grid .detail-btn').forEach((button) => button.addEventListener('click', () => showDetail(button.dataset.id)));
+  });
+});
+
 if (window.location.hash) {
   const page = document.querySelector(window.location.hash);
   if (page) {
