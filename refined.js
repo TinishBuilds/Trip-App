@@ -14,6 +14,21 @@ document.querySelectorAll('[data-page]').forEach((button) => {
   button.addEventListener('click', () => syncMobileNav(button.dataset.page));
 });
 
+// Delegated navigation keeps the sidebar, mobile bar, and inline CTAs in sync even after a re-render.
+document.addEventListener('click', (event) => {
+  const trigger = event.target.closest('[data-page]');
+  if (!trigger) return;
+  event.preventDefault();
+  navigate(trigger.dataset.page);
+  syncMobileNav(trigger.dataset.page);
+});
+
+// The whole budget option card is an affordance, not just the tiny switch.
+document.querySelector('.cheaper-toggle')?.addEventListener('click', (event) => {
+  if (!event.target.closest('#cheap-switch')) document.querySelector('#cheap-switch')?.click();
+});
+document.querySelector('.match-callout')?.addEventListener('click', () => navigate('opportunities'));
+
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') document.querySelectorAll('.modal-wrap.open').forEach((modal) => modal.classList.remove('open'));
 });
