@@ -1,0 +1,50 @@
+{
+  "expo": {
+    "name": "RoamTogether",
+    "slug": "roamtogether",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/roamtogether-icon.png",
+    "scheme": "roamtogether",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "icon": "./assets/images/roamtogether-icon.png",
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tinishbuilds.roamtogether"
+    },
+    "android": {
+      "package": "com.tinishbuilds.roamtogether",
+      "adaptiveIcon": {
+        "backgroundColor": "#FFF8EE",
+        "foregroundImage": "./assets/images/roamtogether-mark.png"
+      },
+      "predictiveBackGestureEnabled": true
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/roamtogether-icon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FFF8EE",
+          "image": "./assets/images/roamtogether-mark.png",
+          "imageWidth": 190
+        }
+      ],
+      [
+        "expo-localization",
+        {
+          "supportedLocales": ["en", "ja"]
+        }
+      ],
+      "expo-sharing"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}

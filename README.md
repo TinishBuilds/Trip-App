@@ -1,8 +1,12 @@
 # RoamTogether
 
-RoamTogether is a polished, static prototype for turning shared travel inspiration into an affordable group itinerary.
+RoamTogether is a social travel app for turning shared inspiration into group itineraries, small adventures, badges, and shareable trip recaps.
 
-## Run it
+## Mobile app
+
+The production-direction React Native app is in [`mobile`](./mobile). It supports iOS, Android, English, Japanese, native maps, persistent trip state, social sharing, and RevenueCat-ready subscriptions. See [`mobile/README.md`](./mobile/README.md) for setup and build instructions.
+
+## Legacy browser prototype
 
 Open `index.html` directly in a browser, or serve the folder locally:
 
