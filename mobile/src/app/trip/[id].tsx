@@ -20,7 +20,7 @@ const voteOptions = [
 
 export default function TripDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { trips, placeVotes, setPlaceVote, useCheaperPicks } = useAppStore();
+  const { trips, placeVotes, setPlaceVote, useCheaperPicks: applyCheaperPicks } = useAppStore();
   const { language, localize, t } = useI18n();
   const trip = trips.find((item) => item.id === id) ?? trips[0];
   const budgetRatio = trip.budget ? Math.min(trip.spent / trip.budget, 1) : 0;
@@ -99,7 +99,7 @@ export default function TripDetailScreen() {
           <Text style={styles.breakdownText}>🎟️ {localize('Activities', '体験')} ¥8,300</Text>
           <Text style={styles.breakdownText}>🚇 {localize('Transit', '交通')} ¥4,950</Text>
         </View>
-        <PrimaryButton label={t('cheaper')} icon="sparkles-outline" variant="light" onPress={() => useCheaperPicks(trip.id)} />
+        <PrimaryButton label={t('cheaper')} icon="sparkles-outline" variant="light" onPress={() => applyCheaperPicks(trip.id)} />
       </View>
 
       <View style={styles.bottomActions}>

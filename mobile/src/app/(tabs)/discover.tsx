@@ -12,7 +12,7 @@ import { colors, radius, shadow, spacing } from '@/theme';
 
 export default function DiscoverScreen() {
   const { cheered, savedRoutes, toggleCheer, toggleSavedRoute } = useAppStore();
-  const { language, localize, t } = useI18n();
+  const { localize, t } = useI18n();
 
   return (
     <Screen>

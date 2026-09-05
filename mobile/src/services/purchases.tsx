@@ -69,19 +69,34 @@ export function PurchaseProvider({ children }: PropsWithChildren) {
   useEffect(() => {
     let listener: CustomerInfoUpdateListener | undefined;
     let cancelled = false;
-    refresh().then(async () => {
-      if (cancelled || !configured) return;
+
+    const initialize = async () => {
       try {
+        const ready = await ensureConfigured();
+        if (cancelled) return;
+        setIsConfigured(ready);
+        if (!ready) return;
+
         const { default: Purchases } = await loadPurchases();
+        const info = await Purchases.getCustomerInfo();
+        if (cancelled) return;
+        update(info);
         listener = (info) => update(info);
         Purchases.addCustomerInfoUpdateListener(listener);
-      } catch { /* Native billing is unavailable in Expo Go. */ }
-    });
+      } catch (caught) {
+        if (!cancelled) setError(caught instanceof Error ? caught.message : 'Could not load purchases.');
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    void initialize();
+
     return () => {
       cancelled = true;
       if (listener) loadPurchases().then(({ default: Purchases }) => Purchases.removeCustomerInfoUpdateListener(listener!)).catch(() => undefined);
     };
-  }, [refresh, update]);
+  }, [update]);
 
   const presentPaywall = useCallback(async () => {
     setError(null);

@@ -9,23 +9,35 @@ The real iOS and Android version of RoamTogether, built with Expo SDK 57, React 
 - Local trip creation and persistent app state
 - Group place voting and itinerary view
 - Working budget totals and cheaper-picks action
-- Native map tiles, markers, route line, callouts, and route fitting
+- Native map tiles, tappable markers, route details, and route fitting
 - Discover feed with cheers and saved routes
 - Badge collection and progress
 - Shareable trip links and a PNG recap card export
 - RevenueCat paywall, `ingara_pro` checks, restore, customer info, and Customer Center
 - A safe server boundary for future ai& trip planning
 
-## Run on a phone
+## Run locally with Android Studio (free)
 
-Requirements: Node.js 22.13 or newer, npm, and Android Studio or Xcode. From this folder:
+Requirements: Node.js 22.13 or newer, npm, Android Studio, and an Android emulator created in Android Studio. From this folder:
 
 ```powershell
 npm install
-npx expo start
+npm run android
 ```
 
-Most of the app can be previewed in Expo Go. RevenueCat purchases require a native development build:
+This creates a native development build, installs it on the emulator, and starts the app. It does not require an Expo login. Keep the terminal open while testing so the app can load updates.
+
+On Windows, keep the repository path short (for example `C:\Trip-App`). Native Android build tools can fail when the project is nested inside a long folder path.
+
+Expo Go is not supported because the app uses native MapLibre and RevenueCat modules. After the first native build, restart the local app server with:
+
+```powershell
+npm start
+```
+
+## Optional cloud builds
+
+Expo's cloud build service requires an Expo account:
 
 ```powershell
 npx eas-cli@latest login
@@ -59,6 +71,7 @@ The ai& key must never be placed in this app. Put a rotated provider key on a ba
 
 ```powershell
 npm run typecheck
+npm run lint
 npm run doctor
 ```
 

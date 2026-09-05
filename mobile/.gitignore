@@ -22,6 +22,9 @@ expo-env.d.ts
 # Metro
 .metro-health-check*
 
+# Local emulator verification captures
+roam-*.png
+
 # debug
 npm-debug.*
 yarn-debug.*
